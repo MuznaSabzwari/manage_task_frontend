@@ -21,10 +21,10 @@ export default function Login() {
         Password: password,
       });
 
-      // ✅ Save userId in cookie
+      // Save userId in cookie
       Cookies.set("userId", res.data.user._id, { expires: 1 });
 
-      // ✅ Navigate to dynamic dashboard route
+      //  Navigate to dynamic dashboard route
       navigate(`/Dashboard/${res.data.user._id}`);
     } catch (err) {
       setError("Invalid email or password");

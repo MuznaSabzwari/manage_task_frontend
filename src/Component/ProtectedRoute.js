@@ -10,6 +10,6 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  // ✅ Cookie exists, allow access
+  // Cookie exists, allow access
   return children;
 }

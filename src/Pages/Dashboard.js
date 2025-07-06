@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import UserHeader from "../Component/UserHeader";
 import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import API from "../Api/Api";
 
 export default function Dashboard() {
   const [showModal, setShowModal] = useState(false);
@@ -23,7 +24,7 @@ export default function Dashboard() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get(`http://localhost:3005/Register/getTasks/${userId}`);
+      const res = await axios.get(`${API}/Register/getTasks/${userId}`);
       setTasks(res.data.tasks);
     } catch (error) {
       console.error("Error fetching tasks:", error);
@@ -34,17 +35,17 @@ export default function Dashboard() {
     try {
       if (isEdit) {
         const res = await axios.put(
-          `http://localhost:3005/Register/updateTask/${userId}/${editIndex}`,
+          `${API}/Register/updateTask/${userId}/${editIndex}`,
           { title, description, dueDate }
         );
         setTasks(res.data.tasks);
       } else {
         const res = await axios.post(
-          `http://localhost:3005/Register/addTask/${userId}`,
+          `${API}/Register/addTask/${userId}`,
           {
             title,
             description,
-            dueDate, // 👈 using user-entered dueDate
+            dueDate, //  using user-entered dueDate
           }
         );
         setTasks(res.data.tasks);
@@ -77,7 +78,7 @@ export default function Dashboard() {
       if (!confirmDelete) return;
 
       const res = await axios.delete(
-        `http://localhost:3005/Register/deleteTask/${userId}/${index}`
+        `${API}/Register/deleteTask/${userId}/${index}`
       );
       setTasks(res.data.tasks);
     } catch (error) {
@@ -92,11 +93,11 @@ export default function Dashboard() {
   return (
     <>
       <UserHeader />
-      <div className="bg-black min-h-screen w-full flex flex-col items-center py-8 px-4">
+      <div className="bg-black min-h-screen w-full flex flex-col items-center py-8 px-4 max-sm:flex-col">
         {/* Top Section */}
-        <div className="w-full max-w-5xl flex flex-row items-center justify-between mb-6">
+        <div className="w-full max-w-5xl flex flex-row items-center justify-between mb-6 max-sm:flex-col">
           <h1 className="text-white text-2xl font-semibold">Total Tasks</h1>
-          <div className="flex gap-4">
+          <div className="flex gap-4 max-sm:flex-col">
             <input
               type="text"
               placeholder="Search tasks..."
