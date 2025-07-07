@@ -4,7 +4,7 @@ import logo from "../Assets/logo.webp";
 import Header from "../Component/Header.js";
 import Footer from "../Component/Footer.js";
 import axios from "axios";
-
+import API from "../Api/Api.js";
 export default function Signup() {
   const [formData, setFormData] = useState({
     Name: "",
@@ -27,7 +27,7 @@ export default function Signup() {
     setSuccess("");
 
     try {
-      const response = await axios.post("http://localhost:3005/Register/addUsers", formData);
+      const response = await axios.post(`${API}/Register/addUsers`, formData);
       setSuccess("Account created successfully!");
       setFormData({ Name: "", Email: "", Password: "", Contact: "" });
 

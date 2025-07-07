@@ -5,6 +5,7 @@ import Header from "../Component/Header.js";
 import Footer from "../Component/Footer.js";
 import axios from "axios";
 import Cookies from "js-cookie";
+import API from "../Api/Api.js";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:3005/Register/login", {
+      const res = await axios.post(`${API}/Register/login`, {
         Email: email,
         Password: password,
       });
